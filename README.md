@@ -1,7 +1,9 @@
 # indoor_air_quality
 ESP32 sending data via MQTT to Raspi4
 
-This was my learning project. I wanted to connect two remote ESP32 with sensors to a central server running on a Raspberry Pi4.
+For me this was a learning project. I wanted to connect 2 remote ESP32 with sensors to a central server running on a Raspberry Pi4.
+Both ESP32 are connected to a sensor multi-function environmental sensor from DFRobot with ENS160 + BME280.
+
 
 Ts &emsp; time stamp\
 temp  &emsp; temperature in °C\
