@@ -1,4 +1,4 @@
-# indoor_air_quality
+# indoor air quality logging
 ESP32 sending data via MQTT to Raspi4
 
 ## 'Why?'
@@ -39,10 +39,21 @@ Port fowarding on your router allows access to the Raspi from outside of your pr
 
 WLAN and other stuff is switched off at night, so the ESPs cannot transmit data to Raspi. Without connection, the ESPs are buffering all measurements with timestamp. After WLAN is switched on, ESPs and Raspi reconnect to WLAN. ESPs reconnect to MQTT broker, then transmitt all buffered data and empty the buffer. Protection from overflow still pending..\
 
+## 'How?'
+
+See the architecture.\ 
+Signal flow is from the sensors to the ESP32 via I2C.\
+Then transmission to the Raspi via MQTT using local WLAN. ESP32 uses Pusbuclient.\
+The Raspi is a model 4 with 4GB. I installed Ubuntu server LTS 22.04.
+Inside the Raspi Mosquitto is the MQTT broker, then Telegraf is a bridge to InfluxDB, which is the database storing all measurements.\
+Grafan is used to visualize data and for downsampling of data. Currently downsampling of buffered data is not working yet - due to the downsampling method chosen.\
+The database and configurations are backed each night on a USB-stick. Backups on the same SD card would be useless if this SD fails. The stick will be mounted before the backup and unmounted afterwards. This is controlled by cron.\
 
 <img width="2844" height="1780" alt="image" src="https://github.com/user-attachments/assets/3df02915-7671-4b42-a1dc-e3e1b00c07ff" />
 
-
+**Scalability**\
+The number of ESPs can easily be increased, just adapt the MQTT hierarchical names.
+The number of signals can be extended, some might need different sampling rates which needs structural modification in the sketch since the main loop is focusing on 60s sensor sampling.
 
 
 <img width="4292" height="2960" alt="image" src="https://github.com/user-attachments/assets/fc0de48e-e73f-4123-9998-4eb29887af0f" />
