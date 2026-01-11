@@ -40,14 +40,9 @@ Port fowarding on your router allows access to the Raspi from outside of your pr
 WLAN and other stuff is switched off at night, so the ESPs cannot transmit data to Raspi. Without connection, the ESPs are buffering all measurements with timestamp. After WLAN is switched on, ESPs and Raspi reconnect to WLAN. ESPs reconnect to MQTT broker, then transmitt all buffered data and empty the buffer. Protection from overflow still pending..\
 
 
-
-
-
-The sensor offers an I2C interface which makes it easy to connect to the ESP32 devkit by 4 wires (5V, GND, SDA, SCL). \
-Make sure to find the right pins, distinguish GPIO numbering from header pins. In my case:\
-WROVER-IE KIT: SDA= 6, SCL= 7\
-C6-WROOM-1 KIT: SDA= 21, SCL= 22\
-Sketch is for Arduino IDE2, same for both kits. Adjust the .secrets file.h with ssid, pw and the pin assignment.
-
-
 <img width="2844" height="1780" alt="image" src="https://github.com/user-attachments/assets/3df02915-7671-4b42-a1dc-e3e1b00c07ff" />
+
+
+
+
+<img width="4292" height="2960" alt="image" src="https://github.com/user-attachments/assets/fc0de48e-e73f-4123-9998-4eb29887af0f" />
