@@ -1,4 +1,4 @@
-\# Indoor air quality measurement and logging
+## Indoor air quality measurement and logging
 
 The sensor offers an I2C interface which makes it easy to connect to the ESP32 devkit by 4 wires (5V, GND, SDA, SCL). \
 Make sure to find the right pins, distinguish GPIO numbering from header pins. In my case:\
