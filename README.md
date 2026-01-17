@@ -19,6 +19,8 @@ The sensor offers a number of pyhsical quantities:
 |tvoc |  TVOC – Total Volatile Organic Compounds| ppb |
 |eco2 | CO2 | ppm |
 
+For details see sensor datasheets.
+
 **Mechanical / HW**\
 The ESPs with sensor are located in different rooms, each powered by a USB charging device.\
 Enclosure: I 'misused' a plastic box intended for cable connections. I see 3 main functions:
