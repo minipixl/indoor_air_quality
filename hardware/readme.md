@@ -18,7 +18,8 @@ The sketch is for Arduino IDE2, same for both kits. Adjust the .secrets file.h w
 Power supply is a standard USB charger, always connected.
 
 # Raspberry Pi4 Model B 4GB
-First I tried PI OS lite and had problems with WLAN, 2.4 GHz was not possible. I switched to Ubuntu server LTS 22.04 and it worked.
+First I tried PI OS lite and had problems with WLAN, 2.4 GHz was not possible. When I switched to Ubuntu server LTS 22.04 it works.
+I recommend to use Raspi power supply, not just some powerful USB charger. The reason is the stable supply voltage level.
 
 
 
