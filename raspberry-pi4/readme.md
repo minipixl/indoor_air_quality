@@ -14,6 +14,8 @@ pstree shows the processes:\
 <img width="379" height="426" alt="image" src="https://github.com/user-attachments/assets/ee06d08e-740e-4a35-8c7c-c998585983b4" />
 
 # Installations\
+see the files as example.\
+
 mosquitto ist the MQTT broker\
 setup & configs: ...\
 \
