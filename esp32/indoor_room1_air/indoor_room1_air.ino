@@ -24,9 +24,9 @@ const char* password = SECRET_PASS;
 
 // ================== MQTT ==================
 const char* mqttServer = mqttserverIP;
-const int   mqttPort   = 1883;
-const char* mqttTopic  = "home/room2/air";
-const char* statusTopic= "home/room2/status";
+const int   mqttPort    = 1883;
+const char* mqttTopic   = RAUM;
+const char* statusTopic = STATS;
 
 WiFiClient espClient;
 PubSubClient mqtt(espClient);
@@ -95,6 +95,21 @@ bool syncTime() {
   }
 }
 
+// ================== ping test ==================
+void testMQTTReachability() {
+  Serial.print("[TEST] Teste Erreichbarkeit von ");
+  Serial.print(mqttServer);
+  Serial.print("...");
+  
+  if (espClient.connect(mqttServer, mqttPort)) {
+    Serial.println(" erreichbar!");
+    espClient.stop();
+  } else {
+    Serial.println(" NICHT erreichbar!");
+  }
+}
+
+
 // ================== MQTT ==================
 void connectMQTT() {
   if (mqtt.connected()) return;
@@ -102,7 +117,7 @@ void connectMQTT() {
   Serial.print("[MQTT] Verbinde zum Broker...");
   mqtt.setServer(mqttServer, mqttPort);
 
-  String cid = "esp32-room2";
+  String cid = DEVICE;
 
   if (mqtt.connect(cid.c_str(), statusTopic, 1, true, "offline")) {
     Serial.println(" verbunden");
@@ -134,7 +149,7 @@ void storeLocally(const String& line) {
 void flushBuffer() {
   if (!mqtt.connected() || !LittleFS.exists(bufferFile)) return;
 
-  Serial.print("[BUFFER] Sende gepufferte Daten... ");
+  Serial.println("[BUFFER] Sende gepufferte Daten... ");
 
   File f = LittleFS.open(bufferFile, FILE_READ);
   File tmp = LittleFS.open("/tmp.jsonl", FILE_WRITE);
@@ -143,8 +158,8 @@ void flushBuffer() {
   while (f.available()) {
     String line = f.readStringUntil('\n');
     if (mqtt.publish(mqttTopic, line.c_str(), true)) {
-      Serial.println(line);  // Ausgabe für Monitor
       sent++;
+      Serial.println(line); // monitor sent data
     } else {
       tmp.println(line);
     }
@@ -166,7 +181,7 @@ void setup() {
   Serial.begin(115200);
   delay(500);
 
-    setenv("TZ", "CET-1CEST,M3.5.0/02,M10.5.0/03", 1);
+  setenv("TZ", "CET-1CEST,M3.5.0/02,M10.5.0/03", 1);
   tzset();
 
   Wire.begin(I2C_SDA, I2C_SCL);
@@ -176,9 +191,11 @@ void setup() {
   }
 
   connectWiFi();
-
+  
   Serial.print("[NTP] Zeit synchronisieren...");
   syncTime();
+
+  testMQTTReachability();  // <-- NEU
 
   // BME280
   Serial.print("[BME280] Initialisiere...");
@@ -223,7 +240,7 @@ void loop() {
     // correct offsets (measured)
     temp = temp + temp_offset;
     hum = hum + hum_offset;
-    
+
     StaticJsonDocument<256> doc;
     doc["ts"]   = lastMeasurementTs;
     doc["temp"] = temp;

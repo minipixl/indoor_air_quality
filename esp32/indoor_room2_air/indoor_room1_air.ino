@@ -24,9 +24,9 @@ const char* password = SECRET_PASS;
 
 // ================== MQTT ==================
 const char* mqttServer = mqttserverIP;
-const int   mqttPort   = 1883;
-const char* mqttTopic  = "home/room2/air";
-const char* statusTopic= "home/room2/status";
+const int   mqttPort    = 1883;
+const char* mqttTopic   = RAUM;
+const char* statusTopic = STATS;
 
 WiFiClient espClient;
 PubSubClient mqtt(espClient);
@@ -117,7 +117,7 @@ void connectMQTT() {
   Serial.print("[MQTT] Verbinde zum Broker...");
   mqtt.setServer(mqttServer, mqttPort);
 
-  String cid = "esp32-room2";
+  String cid = DEVICE;
 
   if (mqtt.connect(cid.c_str(), statusTopic, 1, true, "offline")) {
     Serial.println(" verbunden");
