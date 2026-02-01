@@ -33,7 +33,7 @@
 &nbsp;  sudo reboot
 
 Processes:\
-pstree
+pstree\
 <img width="571" height="487" alt="image" src="https://github.com/user-attachments/assets/a9210407-4182-4a33-ac24-636c9e1361d6" />
 
 
