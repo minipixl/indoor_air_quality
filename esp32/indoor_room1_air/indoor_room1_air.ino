@@ -1,5 +1,6 @@
 #include <WiFi.h>
 #include "arduino_secrets.h"
+#include "configs.h"
 #include <PubSubClient.h>
 #include <Wire.h>
 #include <LittleFS.h>
