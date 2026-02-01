@@ -1,9 +1,10 @@
 # indoor air quality logging
-ESP32 sending data via MQTT to Raspi4
+ESP32 sending data via MQTT to Raspi2
 
 ## 'Why?'
 For me this was a learning project. I wanted to connect 2 remote ESP32 with sensors to a central server running on a Raspberry Pi4.
-Both ESP32 are connected to a sensor multi-function environmental sensor from DFRobot with ENS160 + BME280. I wanted to see it working over the whole chain from reading remote sensors to graphical time series presentation.
+Both ESP32 are connected to a sensor multi-function environmental sensor from DFRobot with ENS160 + BME280. I wanted to see it working over the whole chain from reading remote sensors to graphical time series presentation.\
+Update: With the Raspi4 resources were hardly used, so I changed from Raspi4 to a Raspi2 with 1GB. \
 
 ## 'What?"
 
